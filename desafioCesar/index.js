@@ -36,9 +36,5 @@ $campoConteudo.addEventListener('change', () => {
 })
 
 $campoCasas.addEventListener('change', () => {
-    if (parseInt($campoCasas.value) > 25) {
-        casas = parseInt($campoCasas.value) % 25
-    } else {
-        casas = parseInt($campoCasas.value)
-    };
+    (parseInt($campoCasas.value) > 25) ? casas = parseInt($campoCasas.value) % 25: casas = parseInt($campoCasas.value)
 })
