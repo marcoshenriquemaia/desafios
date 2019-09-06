@@ -4,37 +4,45 @@ const $botao = document.querySelector('.botao');
 const $campoCasas = document.querySelector('#campo-casas');
 
 const alfabeto = 'abcdefghijklmnopqrstuvwxyz';
-const posicoesLetras = [];
+let criptografado = [];
 
-let value;
+let texto;
 let casas;
 
 // 26
 
-const cliptografa = () => {
-    [...value].map(letra => {
+const criptografa = () => {
+    [...texto].forEach(letra => {
         [...alfabeto].map((item, index) => {
-            if (item == letra.toLowerCase()) posicoesLetras.push(index);
+            if (item == letra.toLowerCase()) criptografado.push(alfabeto[(index + casas) % alfabeto.length])
         })
     })
 }
 
 const imprimirTexto = () => {
-    posicoesLetras.map(posicao => {
-        (posicao + casas > 25) ? $campoResultado.textContent = $campoResultado.textContent + alfabeto[25 - casas]:
-            $campoResultado.textContent = $campoResultado.textContent + alfabeto[posicao + casas]
-    })
+    $campoResultado.textContent = criptografado.join('');
+}
+
+const limpaResultado = () =>{
+    $campoResultado.textContent = '';
+}
+
+const resetCritografado = () =>{
+    criptografado = [];
 }
 
 $botao.addEventListener('click', () => {
-    cliptografa();
+    resetCritografado();
+    limpaResultado();
+    criptografa();
     imprimirTexto();
 });
 
-$campoConteudo.addEventListener('change', () => {
-    value = $campoConteudo.value;
+$campoConteudo.addEventListener('change', e => {   
+    texto = e.target.value;
 })
 
-$campoCasas.addEventListener('change', () => {
-    (parseInt($campoCasas.value) > 25) ? casas = parseInt($campoCasas.value) % 25: casas = parseInt($campoCasas.value)
+$campoCasas.addEventListener('change', e => {
+    casas = parseInt(e.target.value);
 })
+
