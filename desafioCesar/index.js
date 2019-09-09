@@ -9,8 +9,6 @@ let criptografado = [];
 let texto;
 let casas;
 
-// 26
-
 const criptografa = () => {
     [...texto].forEach(letra => {
         [...alfabeto].map((item, index) => {
